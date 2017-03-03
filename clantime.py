@@ -71,6 +71,7 @@ def walk_tree(dir):
                         msg, regions = e.args
                         print msg
                         fail_count += 1
+                        err_out.write("{}\n\n".format(file))
                         err_out.writelines([comment.line for comment in regions])
                         err_out.write("\n\n\n")
 
