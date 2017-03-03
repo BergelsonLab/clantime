@@ -67,12 +67,13 @@ def walk_tree(dir):
                         silen_time = sum(x[1] - x[0] for x in silences)
                         skips_time = sum(x[1] - x[0] for x in skips)
                         results.append([file, clan_file.total_time, subrg_time, silen_time, skips_time])
+                        # print "".join(["{} ---  {}\n".format(comment.line.replace("\n", ""), comment.time_onset) for comment in regions])
                     except Exception as e:
                         msg, regions = e.args
                         print msg
                         fail_count += 1
                         err_out.write("{}\n\n".format(file))
-                        err_out.writelines([comment.line for comment in regions])
+                        err_out.writelines(["{} ---  {}\n".format(comment.line.replace("\n", ""), comment.time_onset) for comment in regions])
                         err_out.write("\n\n\n")
 
     print "\n\n\nfailed file count:  {}".format(fail_count)
@@ -92,5 +93,3 @@ if __name__ == "__main__":
         writer = csv.writer(out)
         writer.writerow(['file', 'total', 'subregion', 'silence', 'skip'])
         writer.writerows(results)
-
-
